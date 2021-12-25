@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
+@Table(name = "sabablar")
 public class Sabablar {
     private Long id_sabablar;
     private String prichina;

@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "result")
 public class Result {
     private Long id_result;
     private Integer rline11;

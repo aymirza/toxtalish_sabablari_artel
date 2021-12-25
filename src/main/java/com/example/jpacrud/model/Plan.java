@@ -6,6 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "plan")
 public class Plan {
     private Long id_plan;
     private Integer pline11;

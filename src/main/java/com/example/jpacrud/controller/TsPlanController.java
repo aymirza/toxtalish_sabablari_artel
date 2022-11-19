@@ -1,7 +1,6 @@
 package com.example.jpacrud.controller;
 
 
-import com.example.jpacrud.model.Sabablar;
 import com.example.jpacrud.model.SabablarPlan;
 import com.example.jpacrud.service.SabablarPlanService;
 import org.springframework.beans.factory.annotation.Autowired;

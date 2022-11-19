@@ -39,6 +39,7 @@ public class TsController {
         }
         return "index";
     }
+
     @RequestMapping("/newPlan")
     public String showNewPlanPage(Model model) {
         Plan plan = new Plan();
@@ -89,6 +90,18 @@ public class TsController {
     public String deleteSabablar(@PathVariable(name = "id") int id) {
         sabablarService.deleteSabablar(id);
         return "redirect:/";
+    }
+
+    @RequestMapping("/plan")
+    public String viewTsPagePlan(Model model,@Param("poisk") String poisk) {
+        if(poisk==null) {
+            System.out.println("Vvedite datu");
+        }else {
+            List<Sabablar> sabablarList = sabablarService.listAllSabablar(poisk);
+            model.addAttribute("sabablarList", sabablarList);
+            model.addAttribute("poisk", poisk);
+        }
+        return "index";
     }
 
 

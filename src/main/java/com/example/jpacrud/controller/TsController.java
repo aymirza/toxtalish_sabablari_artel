@@ -24,7 +24,7 @@ public class TsController {
     @Autowired
     private SabablarService sabablarService;
 
-    @RequestMapping("/")
+    @RequestMapping("/tsturk")
     public String viewTsPage(Model model,@Param("poisk") String poisk) {
         if(poisk==null) {
             System.out.println("Vvedite datu");
@@ -37,7 +37,7 @@ public class TsController {
             model.addAttribute("sabablarList", sabablarList);
             model.addAttribute("poisk", poisk);
         }
-        return "index";
+        return "index_ts_turk";
     }
 
     @RequestMapping("/newPlan")
@@ -101,7 +101,7 @@ public class TsController {
             model.addAttribute("sabablarList", sabablarList);
             model.addAttribute("poisk", poisk);
         }
-        return "index";
+        return "index_ts_turk";
     }
 
 

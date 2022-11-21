@@ -4,7 +4,12 @@ package com.example.jpacrud.controller;
 import com.example.jpacrud.model.SabablarPlan;
 import com.example.jpacrud.service.SabablarPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -32,9 +38,19 @@ public class TsPlanController {
             model.addAttribute("sabablarPlanList", sabablarPlanList);
             model.addAttribute("poiskdate", poiskdate);
         }
-        return "indexplan";
+        return "index_plan";
     }
 
+    @RequestMapping("/excel")
+    public ResponseEntity<Resource> getFile(@Param("poiskdate") String poiskdate) {
+        String filename = "toxtalish_sabablari_faac_ref"+ LocalDateTime.now()+".xlsx";
+        InputStreamResource file = new InputStreamResource(sabablarPlanService.exportExcelTsPlan(poiskdate));
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/vnd.ms-excel"))
+                .body(file);
+    }
     @RequestMapping("/newsabablarplan")
     public String showNewSabablarPlanPage(Model model) {
         SabablarPlan sabablarplann = new SabablarPlan();
